@@ -8,7 +8,7 @@ class Object
   end
 
   def legit?
-     !bullshit?
+    !bullshit?
   end
   
   alias is_bullshit? bullshit?
