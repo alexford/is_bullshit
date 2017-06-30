@@ -2,6 +2,8 @@
 
 ### Call bullshit on stuff.
 
+[![Build Status](https://travis-ci.org/alexford/is_bullshit.svg?branch=master)](https://travis-ci.org/alexford/is_bullshit)
+
 Sometimes things that are "truthy" are really just bullshit. This gem is for when falsey/truthy aren't enough.
 
 ## Installation
