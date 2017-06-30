@@ -13,10 +13,12 @@ class Object
     '0' => true,
     'nil' => true,
     'null' => true,
+    Float::INFINITY => true,
+    BigDecimal::INFINITY => true
   }
 
   def bullshit?
-    !!BULLSHIT_VALUES[self]
+    !!BULLSHIT_VALUES[self] or (self.nan? if [Float, BigDecimal].member? self.class)
   end
 
   def legit?
