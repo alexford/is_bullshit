@@ -1,14 +1,26 @@
 require "is_bullshit/version"
 
 class Object
-  BULLSHIT_VALUES = [nil, [], {}, 0, false, 'undefined', 'false', '', '0', 'nil', 'null']
+  BULLSHIT_VALUES = {
+    nil => true,
+    [] => true,
+    {} => true,
+    0 => true,
+    false => true,
+    'undefined' => true,
+    'false' => true,
+    '' => true,
+    '0' => true,
+    'nil' => true,
+    'null' => true,
+  }
 
   def bullshit?
-    BULLSHIT_VALUES.include? self
+    !!BULLSHIT_VALUES[self]
   end
 
   def legit?
-     !bullshit?
+    !bullshit?
   end
   
   alias is_bullshit? bullshit?
