@@ -1,4 +1,5 @@
 require "is_bullshit/version"
+require "bigdecimal"
 
 class Object
   BULLSHIT_VALUES = {
