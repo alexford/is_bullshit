@@ -51,14 +51,14 @@ class IsBullshitTest < Minitest::Test
     refute 'null'.legit?
   end
 
-  def seems_legit
+  def test_seems_legit
     assert 'totally legit'.seems_legit?
     assert 1.seems_legit?
     assert Hash[foo: 'bar'].seems_legit?
 
     refute nil.seems_legit?
     refute [].seems_legit?
-    refute {}.seems_legit?
+    refute Hash[].seems_legit?
     refute 0.seems_legit?
     refute false.seems_legit?
     refute 'undefined'.seems_legit?
@@ -67,5 +67,10 @@ class IsBullshitTest < Minitest::Test
     refute '0'.seems_legit?
     refute 'nil'.seems_legit?
     refute 'null'.seems_legit?
+  end
+
+  def test_strings_case_insensitive
+    assert 'False'.bullshit?
+    assert 'NULL'.bullshit?
   end
 end

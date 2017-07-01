@@ -1,28 +1,33 @@
 require "is_bullshit/version"
 
 class Object
-  BULLSHIT_VALUES = {
-    nil => true,
-    [] => true,
-    {} => true,
-    0 => true,
-    false => true,
-    'undefined' => true,
-    'false' => true,
-    '' => true,
-    '0' => true,
-    'nil' => true,
-    'null' => true,
-  }
-
   def bullshit?
-    !!BULLSHIT_VALUES[self]
+    respond_to?(:empty?) ? !!empty? : !self
   end
 
   def legit?
     !bullshit?
   end
-  
-  alias is_bullshit? bullshit?
-  alias seems_legit? legit?
+
+  def is_bullshit?
+    bullshit?
+  end
+
+  def seems_legit?
+    legit?
+  end
+end
+
+class Integer
+  def bullshit?
+    zero?
+  end
+end
+
+class String
+  BS_REGEX = /\A[[:space:]]*\z/
+  BS_STRINGS = %w(0 false nil null undefined)
+  def bullshit?
+    empty? || !!(BS_REGEX =~ self) || BS_STRINGS.any? { |s| casecmp(s).zero? }
+  end
 end
