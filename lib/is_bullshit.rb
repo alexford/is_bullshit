@@ -29,4 +29,5 @@ class Object
 
   alias is_bullshit? bullshit?
   alias seems_legit? legit?
+  alias is_clearly_bullshit clearly_bullshit
 end

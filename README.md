@@ -28,7 +28,7 @@ Call `.bullshit?` on stuff. `.is_bullshit?` was added as an alias also because t
 
 The following values qualify as total bullshit: `[nil, [], {}, 0, false, 'undefined', 'false', '', '0', 'nil', 'null']`
 
-`.legit?` and `.seems_legit?` are the opposite of `.bullshit?` 
+`.legit?` and `.seems_legit?` are the opposite of `.bullshit?`
 
 ````
 nil.bullshit?               # true
@@ -42,6 +42,11 @@ nil.is_bullshit?            # also works
 'undefined'.seems_legit?    # false
 'foo'.bullshit?             # false
 'foo'.seems_legit?          # true
+
+# Add your own bullshit
+'bullshit'.is_bullshit?     # false
+'bullshit'.clearly_bullshit
+'bullshit'.is_bullshit?     # true
 ````
 
 ## Development
@@ -58,4 +63,3 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/alexfo
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
