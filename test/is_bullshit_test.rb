@@ -5,67 +5,51 @@ class IsBullshitTest < Minitest::Test
     refute_nil ::IsBullshit::VERSION
   end
 
-  def test_bullshit
-    assert nil.bullshit?
-    assert [].bullshit?
-    assert Hash[].bullshit?
-    assert 0.bullshit?
-    assert false.bullshit?
-    assert 'undefined'.bullshit?
-    assert 'false'.bullshit?
-    assert ''.bullshit?
-    assert '0'.bullshit?
-    assert 'nil'.bullshit?
-    assert 'null'.bullshit?
+  [['bullshit', :bullshit], ['is_bullshit', :bullshit], ['legit', :legit], ['seems_legit', :legit]].each do |method, expectation|
+    send :define_method, "test_#{method}".to_sym do
+      
+      # bullshit 
+      [
+        nil,
+        [],
+        Hash[],
+        0,
+        false,
+        'undefined',
+        'false',
+        '',
+        '0',
+        'nil',
+        'null',
+        Float::INFINITY,
+        (1.0/0),
+        Float::NAN,
+        (0.0/0),
+        BigDecimal::INFINITY,
+        (BigDecimal.new(1)/0),
+        BigDecimal::NAN,
+        (BigDecimal.new(0)/0)
+      ].each do |what_is_this|
+        if expectation == :bullshit
+          assert what_is_this.send("#{method}?".to_sym)
+        else
+          refute what_is_this.send("#{method}?".to_sym)
+        end
+      end
+
+      # legit stuff
+      [
+        'totally legit',
+        1,
+        Hash[foo: 'bar']
+      ].each do |what_is_this|
+        if expectation == :bullshit
+          refute what_is_this.send("#{method}?".to_sym)
+        else
+          assert what_is_this.send("#{method}?".to_sym)
+        end
+      end
+    end
   end
 
-  def test_is_bullshit
-    assert nil.is_bullshit?
-    assert [].is_bullshit?
-    assert Hash[].is_bullshit?
-    assert 0.is_bullshit?
-    assert false.is_bullshit?
-    assert 'undefined'.is_bullshit?
-    assert 'false'.is_bullshit?
-    assert ''.is_bullshit?
-    assert '0'.is_bullshit?
-    assert 'nil'.is_bullshit?
-    assert 'null'.is_bullshit?
-  end
-
-  def test_legit
-    assert 'totally legit'.legit?
-    assert 1.legit?
-    assert Hash[foo: 'bar'].legit?
-
-    refute nil.legit?
-    refute [].legit?
-    refute Hash[].legit?
-    refute 0.legit?
-    refute false.legit?
-    refute 'undefined'.legit?
-    refute 'false'.legit?
-    refute ''.legit?
-    refute '0'.legit?
-    refute 'nil'.legit?
-    refute 'null'.legit?
-  end
-
-  def seems_legit
-    assert 'totally legit'.seems_legit?
-    assert 1.seems_legit?
-    assert Hash[foo: 'bar'].seems_legit?
-
-    refute nil.seems_legit?
-    refute [].seems_legit?
-    refute {}.seems_legit?
-    refute 0.seems_legit?
-    refute false.seems_legit?
-    refute 'undefined'.seems_legit?
-    refute 'false'.seems_legit?
-    refute ''.seems_legit?
-    refute '0'.seems_legit?
-    refute 'nil'.seems_legit?
-    refute 'null'.seems_legit?
-  end
 end
