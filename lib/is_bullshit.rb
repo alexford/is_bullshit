@@ -1,7 +1,7 @@
-require "is_bullshit/version"
+require 'is_bullshit/version'
 
 class Object
-  BULLSHIT_VALUES = {
+  @@bullshit_values = {
     nil => true,
     [] => true,
     {} => true,
@@ -12,17 +12,21 @@ class Object
     '' => true,
     '0' => true,
     'nil' => true,
-    'null' => true,
+    'null' => true
   }
 
   def bullshit?
-    !!BULLSHIT_VALUES[self]
+    !!@@bullshit_values[self]
   end
 
   def legit?
     !bullshit?
   end
-  
+
+  def clearly_bullshit
+    @@bullshit_values[self] = true unless @@bullshit_values.key?(self)
+  end
+
   alias is_bullshit? bullshit?
   alias seems_legit? legit?
 end
