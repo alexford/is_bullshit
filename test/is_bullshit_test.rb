@@ -68,4 +68,9 @@ class IsBullshitTest < Minitest::Test
     refute 'nil'.seems_legit?
     refute 'null'.seems_legit?
   end
+
+  def test_clearly_bullshit
+    'bullshit'.clearly_bullshit
+    assert 'bullshit'.is_bullshit?
+  end
 end
