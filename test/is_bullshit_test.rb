@@ -17,6 +17,7 @@ class IsBullshitTest < Minitest::Test
     assert '0'.bullshit?
     assert 'nil'.bullshit?
     assert 'null'.bullshit?
+    assert '🐮💩'.bullshit?
   end
 
   def test_is_bullshit
@@ -31,6 +32,7 @@ class IsBullshitTest < Minitest::Test
     assert '0'.is_bullshit?
     assert 'nil'.is_bullshit?
     assert 'null'.is_bullshit?
+    assert '🐮💩'.is_bullshit?
   end
 
   def test_legit
@@ -49,6 +51,7 @@ class IsBullshitTest < Minitest::Test
     refute '0'.legit?
     refute 'nil'.legit?
     refute 'null'.legit?
+    refute '🐮💩'.legit?
   end
 
   def seems_legit
@@ -67,5 +70,6 @@ class IsBullshitTest < Minitest::Test
     refute '0'.seems_legit?
     refute 'nil'.seems_legit?
     refute 'null'.seems_legit?
+    refute '🐮💩'.seems_legit?
   end
 end
