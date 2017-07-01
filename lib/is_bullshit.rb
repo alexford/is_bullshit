@@ -13,6 +13,7 @@ class Object
     '0' => true,
     'nil' => true,
     'null' => true,
+    '🐮💩' => true
   }
 
   def bullshit?
