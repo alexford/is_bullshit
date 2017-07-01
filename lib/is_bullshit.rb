@@ -1,22 +1,23 @@
 require "is_bullshit/version"
+require "set"
 
 class Object
-  BULLSHIT_VALUES = {
-    nil => true,
-    [] => true,
-    {} => true,
-    0 => true,
-    false => true,
-    'undefined' => true,
-    'false' => true,
-    '' => true,
-    '0' => true,
-    'nil' => true,
-    'null' => true,
-  }
+  BULLSHIT_SET = Set.new([
+    nil,
+    [],
+    {},
+    0,
+    false,
+    "undefined",
+    "false",
+    "",
+    "0",
+    "nil",
+    "null"
+  ])
 
   def bullshit?
-    !!BULLSHIT_VALUES[self]
+    BULLSHIT_SET.include? self
   end
 
   def legit?
