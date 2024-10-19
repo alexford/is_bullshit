@@ -26,7 +26,7 @@ end
 
 class String
   BS_REGEX = /\A[[:space:]]*\z/
-  BS_STRINGS = %w(0 false nil null undefined)
+  BS_STRINGS = %w(0 -0 false nil null undefined NaN [object\ Object])
   def bullshit?
     empty? || !!(BS_REGEX =~ self) || BS_STRINGS.any? { |s| casecmp(s).zero? }
   end

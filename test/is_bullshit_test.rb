@@ -17,6 +17,9 @@ class IsBullshitTest < Minitest::Test
     assert '0'.bullshit?
     assert 'nil'.bullshit?
     assert 'null'.bullshit?
+    assert '-0'.bullshit?
+    assert '[object Object]'.bullshit?
+    assert 'NaN'.bullshit?
   end
 
   def test_is_bullshit
@@ -31,6 +34,9 @@ class IsBullshitTest < Minitest::Test
     assert '0'.is_bullshit?
     assert 'nil'.is_bullshit?
     assert 'null'.is_bullshit?
+    assert '-0'.is_bullshit?
+    assert '[object Object]'.is_bullshit?
+    assert 'NaN'.is_bullshit?
   end
 
   def test_legit
@@ -49,6 +55,9 @@ class IsBullshitTest < Minitest::Test
     refute '0'.legit?
     refute 'nil'.legit?
     refute 'null'.legit?
+    refute '-0'.legit?
+    refute '[object Object]'.legit?
+    refute 'NaN'.legit?
   end
 
   def test_seems_legit
@@ -67,6 +76,9 @@ class IsBullshitTest < Minitest::Test
     refute '0'.seems_legit?
     refute 'nil'.seems_legit?
     refute 'null'.seems_legit?
+    refute '-0'.seems_legit?
+    refute '[object Object]'.seems_legit?
+    refute 'NaN'.seems_legit?
   end
 
   def test_strings_case_insensitive
